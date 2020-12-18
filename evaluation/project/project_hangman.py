@@ -18,12 +18,14 @@ tryCount = 7
 #request the user to put a letter
 def guess():
     try:
-        inputLetter = input("Choose a letter : ").upper()
-        if inputLetter.isalpha() and len(inputLetter) == 1: #single+letter
-            return inputLetter
-        else:
-            print("You didn't write a single letter, don't you ?")
-            guess() #reset function
+        while True:
+            inputLetter = input("Choose a letter : ").upper()
+            if inputLetter.isalpha() and len(inputLetter) == 1: #single+letter
+                break
+            else:
+                print("You didn't write a single letter, don't you ?")
+                
+        return inputLetter
 
     except Exception as e:
             print("Error :", e)
@@ -52,7 +54,7 @@ def replaceLetter(emptyWord, letter, pos):
 #------------------------ CORE ------------------------#
 
 #uncomment if you want to test with the word written
-#print(word)
+print(word)
 
 print("Hangman is starting...")
 print(' '.join(map(str, emptyWord)))
@@ -63,7 +65,7 @@ while tryCount > 0:
     
     match_ = match(word, inputLetter_)
     #print(match_)
-
+    
     if match_[0] == True:
         fetch = replaceLetter(emptyWord, match_[1], match_[2])
         print(' '.join(map(str, fetch)))
